@@ -1,0 +1,26 @@
+@use 'theme';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme.$light-secondary;
+  border-radius: 0.5rem;
+}
+
+/*
+  Leaflet or React Leaflet doesn't mention making elements of this class have a height of 100%.
+  However the map doesn't show otherwise
+*/
+.leaflet-container {
+  height: 100%;
+}

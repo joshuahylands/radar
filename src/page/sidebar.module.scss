@@ -1,0 +1,65 @@
+@use '@styles/theme';
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+
+  > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  > main {
+    overflow-y: scroll;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .sidebar {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .sidebar {
+    width: 30%
+  }
+}
+
+.light {
+  @extend .sidebar;
+  background: theme.$light-primary;
+  color: theme.$dark-secondary;
+
+  .sidebar-row {
+    border-bottom: 1px solid theme.$light-secondary;
+    > div {
+      border-right: 1px solid theme.$light-secondary;
+    }
+  }
+}
+
+.dark {
+  @extend .sidebar;
+  background: theme.$dark-primary;
+  color: theme.$white;
+
+  .sidebar-row {
+    border-bottom: 1px solid theme.$dark-secondary;
+    > div {
+      border-right: 1px solid theme.$dark-secondary;
+    }
+  }
+}
+
+.close {
+  cursor: pointer;
+}

@@ -1,0 +1,20 @@
+@use '@styles/theme';
+
+.nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  border-radius: 5px;
+  margin: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  padding-right: 0;
+  background-color: theme.$white;
+  z-index: 1;
+
+  > * {
+    padding-right: 0.5rem;
+    cursor: pointer;
+  }
+}

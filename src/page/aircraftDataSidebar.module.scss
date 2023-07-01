@@ -1,0 +1,40 @@
+.aircraftData {
+  img {
+    max-width: 100%;
+  }
+
+  section {
+    display: flex;
+    padding: 0.5rem;
+    
+    > div {
+      flex-grow: 1;
+      flex-basis: 0;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+
+      > label {
+        display: flex;
+        font-size: 0.9rem;
+
+        > span {
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.navModes {
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: bold;
+}
+
+.disabled {
+  color: red;
+}
+
+.enabled {
+  color: green;
+}

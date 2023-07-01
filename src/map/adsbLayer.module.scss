@@ -1,0 +1,21 @@
+@use '@styles/theme';
+
+.tooltip {
+  font-weight: bold;
+  border: 0;
+
+  &::before {
+    display: none;
+  }
+}
+
+.dark {
+  @extend .tooltip;
+  background: theme.$dark-secondary;
+  color: theme.$light-primary;
+}
+.light {
+  @extend .tooltip;
+  background: theme.$light-secondary;
+  color: theme.$dark-primary;
+}
