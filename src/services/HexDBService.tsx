@@ -24,8 +24,10 @@ export function useAircraftImage(icao24?: string): string {
   return image;
 }
 
-export function useCallsignRoute(callsign?: string): [string, string] {
-  const [route, setRoute] = useState<[string, string]>(['N/A', 'N/A']);
+type Route = [ string?, string? ];
+
+export function useCallsignRoute(callsign?: string): Route {
+  const [route, setRoute] = useState<Route>([ undefined, undefined ]);
 
   useEffect(() => {
     if (!callsign) return;
@@ -36,13 +38,16 @@ export function useCallsignRoute(callsign?: string): [string, string] {
     fetch(url)
       .then(async res => {
         const routeRaw = await res.text();
-        const routeParts = routeRaw.split('-');
 
-        setRoute([routeParts[0], routeParts[1]]);
-      })
-      .catch(() => setRoute(['N/A', 'N/A']));
+        if (routeRaw == 'n/a') {
+          setRoute([ undefined, undefined ]);
+        } else {
+          const routeParts = routeRaw.split('-');
+          setRoute([routeParts[0], routeParts[1]]);
+        }
+      });
 
-    return () => setRoute(['N/A', 'N/A']);
+    return () => setRoute([ undefined, undefined ]);
   }, [callsign]);
 
   return route;

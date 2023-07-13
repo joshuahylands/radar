@@ -3,6 +3,7 @@ import { AttributionControl, MapContainer, TileLayer } from 'react-leaflet';
 
 import { useTheme, SettingsContext } from '@context/SettingsContext';
 import ADSBLayer from './ADSBLayer';
+import AirportsLayer from './AirportsLayer';
 
 import styles from './map.module.scss';
 
@@ -30,6 +31,7 @@ function Map() {
           weatherLayer != undefined && <TileLayer url={`https://tile.openweathermap.org/map/${weatherLayer}/{z}/{x}/{y}.png?appid=${import.meta.env.VITE_OPENWEATHER_API_KEY}`}/>
         }
         <ADSBLayer/>
+        <AirportsLayer/>
       </MapContainer>
     </div>
   );

@@ -4,6 +4,7 @@ import { SettingsContextProvider } from '@context/SettingsContext';
 import Map from '@map/Map';
 import NavBar from '@page/NavBar';
 import AircraftDataSidebar from '@page/AircraftDataSidebar';
+import AirportSidebar from '@page/AirportSidebar';
 import SettingsSidebar from '@page/SettingsSidebar';
 import { ADSBServiceProvider } from '@services/ADSBService';
 
@@ -18,7 +19,8 @@ function App() {
           <Routes>
             <Route path="/" element={null}/>
             <Route path="/settings" element={<SettingsSidebar/>}/>
-            <Route path="/:icao24" element={<AircraftDataSidebar/>}/>
+            <Route path="/aircraft/:icao24" element={<AircraftDataSidebar/>}/>
+            <Route path="/airport/:icao" element={<AirportSidebar/>}/>
           </Routes>
         </ADSBServiceProvider>
         <NavBar/>

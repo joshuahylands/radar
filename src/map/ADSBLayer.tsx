@@ -40,7 +40,7 @@ type AircraftMarkerProps = {
 function AircraftMarker(props: AircraftMarkerProps) {
   const theme = useTheme();
   const navigate = useNavigate();
-  const match = useMatch('/:icao24');
+  const match = useMatch('/aircraft/:icao24');
   const { aircraftTooltipsPermanent } = useContext(SettingsContext);
 
   // Workaround to allow the Tooltip to update. The Tooltip is not mutable, therefore we have to forcefully remove then re add the component
@@ -67,7 +67,7 @@ function AircraftMarker(props: AircraftMarkerProps) {
         })
       }
       eventHandlers={{
-        click: () => props.aircraft.hex && navigate(`/${props.aircraft.hex}`)
+        click: () => props.aircraft.hex && navigate(`/aircraft/${props.aircraft.hex}`)
       }}>
       {
         showTooltips && (
