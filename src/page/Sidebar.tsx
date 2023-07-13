@@ -1,4 +1,3 @@
-import { Cancel } from 'iconoir-react';
 import { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +17,7 @@ function Sidebar(props: PropsWithChildren<SidebarProps>) {
     <div className={theme == 'dark' ? style.dark : style.light}>
       <header>
         <span>{ props.title }</span>
-        <Cancel className={style.close} onClick={() => navigate('/')}/>
+        <span className={`material-symbols-outlined ${style.close}`} onClick={() => navigate('/')}>close</span>
       </header>
       <main>{ props.children }</main>
     </div>

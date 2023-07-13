@@ -1,4 +1,3 @@
-import { InfoEmpty } from 'iconoir-react';
 import { useParams } from 'react-router-dom';
 
 import Spinner from '@components/Spinner';
@@ -71,7 +70,7 @@ function AircraftDataSidebar() {
               <div>
                 <label>
                   <span>Nav Modes</span>
-                  <Tooltip text="Shows the current autopilot modes activated" position="top"><InfoEmpty/></Tooltip>
+                  <Tooltip text="Shows the current autopilot modes activated" position="top"><span className="material-symbols-outlined">info</span></Tooltip>
                 </label>
                 <div className={styles.navModes}>
                   <span className={aircraftADSBData.nav_modes?.includes('autopilot') ? styles.enabled : styles.disabled}>AP</span>

@@ -1,4 +1,3 @@
-import { Cloud, CloudError, Computer, HalfMoon, Message, MessageText, Parking, Rain, Settings, SunLight, TemperatureHigh, Wind } from 'iconoir-react';
 import { useContext, useMemo } from 'react';
 import { useMatch, useNavigate } from 'react-router-dom';
 
@@ -12,11 +11,11 @@ function NavBarTheme() {
 
   const icon = useMemo<React.JSX.Element>(() => {
     if (theme == 'system') {
-      return <Computer onClick={() => setTheme('dark')}/>;
+      return <span className="material-symbols-outlined" onClick={() => setTheme('dark')}>settings_brightness</span>;
     } else if (theme == 'dark') {
-      return <HalfMoon onClick={() => setTheme('light')}/>;
+      return <span className="material-symbols-outlined" onClick={() => setTheme('light')}>dark_mode</span>;
     } else {
-      return <SunLight onClick={() => setTheme('system')}/>;
+      return <span className="material-symbols-outlined" onClick={() => setTheme('system')}>light_mode</span>;
     }
   }, [theme]);
 
@@ -33,32 +32,32 @@ function NavBarWeather() {
   const { icon, tooltipText } = useMemo<{ icon: React.JSX.Element, tooltipText: string }>(() => {
     if (weatherLayer == 'clouds_new') {
       return {
-        icon: <Cloud onClick={() => setWeatherLayer('precipitation_new')}/>,
+        icon: <span className="material-symbols-outlined" onClick={() => setWeatherLayer('precipitation_new')}>cloudy</span>,
         tooltipText: 'Clouds'
       };
     } else if (weatherLayer == 'precipitation_new') {
       return {
-        icon: <Rain onClick={() => setWeatherLayer('pressure_new')}/>,
+        icon: <span className="material-symbols-outlined" onClick={() => setWeatherLayer('pressure_new')}>rainy</span>,
         tooltipText: 'Precipitation'
       };
     } else if (weatherLayer == 'pressure_new') {
       return {
-        icon: <Parking onClick={() => setWeatherLayer('wind_new')}/>,
+        icon: <span className="material-symbols-outlined" onClick={() => setWeatherLayer('wind_new')}>compare_arrows</span>,
         tooltipText: 'Pressure'
       };
     } else if (weatherLayer == 'wind_new') {
       return {
-        icon: <Wind onClick={() => setWeatherLayer('temp_new')}/>,
+        icon: <span className="material-symbols-outlined" onClick={() => setWeatherLayer('temp_new')}>air</span>,
         tooltipText: 'Wind'
       };
     } else if (weatherLayer == 'temp_new') {
       return {
-        icon: <TemperatureHigh onClick={() => setWeatherLayer(undefined)}/>,
+        icon: <span className="material-symbols-outlined" onClick={() => setWeatherLayer(undefined)}>thermostat</span>,
         tooltipText: 'Temperature'
       };
     } else {
       return {
-        icon: <CloudError onClick={() => setWeatherLayer('clouds_new')}/>,
+        icon: <span className="material-symbols-outlined" onClick={() => setWeatherLayer('clouds_new')}>clear_day</span>,
         tooltipText: 'None'
       };
     }
@@ -78,9 +77,9 @@ function NavBarAircraftTooltips() {
     <Tooltip position="top" text={`Aircraft Tooltips: ${aircraftTooltipsPermanent ? 'Enabled' : 'Disabled'}`} style={{ marginBottom: '0.5rem' }}>
       {
         aircraftTooltipsPermanent ? (
-          <MessageText onClick={() => setAircraftTooltipsPermanent(false)}/>
+          <span className="material-symbols-outlined" onClick={() => setAircraftTooltipsPermanent(false)}>chat</span>
         ) : (
-          <Message onClick={() => setAircraftTooltipsPermanent(true)}/>
+          <span className="material-symbols-outlined" onClick={() => setAircraftTooltipsPermanent(true)}>chat_bubble</span>
         )
       }
     </Tooltip>
@@ -94,7 +93,7 @@ function NavBar() {
   return (
     <div className={styles.nav}>
       <Tooltip position="top" text="Settings" style={{ marginBottom: '0.5rem' }}>
-        <Settings onClick={() => match ? navigate('/') : navigate('/settings')}/>
+        <span className="material-symbols-outlined" onClick={() => match ? navigate('/') : navigate('/settings')}>settings</span>
       </Tooltip>
       <NavBarTheme/>
       <NavBarWeather/>

@@ -1,5 +1,4 @@
 import Tooltip from '@components/Tooltip';
-import { InfoEmpty } from 'iconoir-react';
 
 type SidebarDataProps = {
   label: string;
@@ -13,7 +12,13 @@ function SidebarData(props: SidebarDataProps) {
     <div>
       <label>
         <span>{ props.label }</span>
-        { props.tooltip ? <Tooltip text={props.tooltip} position="top"><InfoEmpty/></Tooltip> : null}
+        {
+          props.tooltip ? (
+            <Tooltip text={props.tooltip} position="top">
+              <span className="material-symbols-outlined">info</span>
+            </Tooltip>
+          ) : null
+        }
       </label>
       <span>{ props.data || 'N/A' }{ props.data ? props.units : '' }</span>
     </div>
