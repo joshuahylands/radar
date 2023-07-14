@@ -10,6 +10,7 @@ export default defineConfig({
       { find: '@context', replacement: '/src/context' },
       { find: '@map', replacement: '/src/map' },
       { find: '@model', replacement: '/src/model' },
+      { find: '@nav', replacement: '/src/nav' },
       { find: '@page', replacement: '/src/page' },
       { find: '@services', replacement: '/src/services' },
       { find: '@styles', replacement: '/src/styles' }
