@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 // The URL to the HexDB API. The docs are hosted at https://hexdb.io/
 const HEXDB_URL = new URL('https://hexdb.io/');
 
-export function useAircraftImage(icao24?: string): string {
-  const [image, setImage] = useState<string>('/plane.jpg');
+export function useAircraftImage(icao24?: string): string | null {
+  const [image, setImage] = useState<string | null>(null);
 
   useEffect(() => {
+    setImage(null);
     if (!icao24) return;
 
     const url = new URL('/hex-image', HEXDB_URL);
@@ -45,7 +46,8 @@ export function useCallsignRoute(callsign?: string): Route {
           const routeParts = routeRaw.split('-');
           setRoute([routeParts[0], routeParts[1]]);
         }
-      });
+      })
+      .catch(() => setRoute([ undefined, undefined ]));
 
     return () => setRoute([ undefined, undefined ]);
   }, [callsign]);

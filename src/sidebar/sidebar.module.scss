@@ -1,0 +1,86 @@
+@use '@styles/theme';
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  box-sizing: border-box;
+  transition: 0.3s linear transform;
+  display: flex;
+  flex-direction: column;
+
+  > header {
+    display: flex;
+    place-content: center;
+    z-index: -1;
+    padding-block: 0.5rem;
+
+    > span {
+      cursor: pointer;
+    }
+  }
+
+  > main {
+    overflow-y: scroll;
+  }
+}
+
+.dark {
+  @extend .sidebar;
+  background: theme.$dark-primary;
+  color: theme.$light-primary;
+
+  > header {
+    background: theme.$dark-primary;
+  }
+}
+
+.light {
+  @extend .sidebar;
+  background: theme.$light-primary;
+  color: theme.$dark-primary;
+
+  > header {
+    background: theme.$light-primary;
+  }
+}
+
+.disabled {
+  transform: translateY(100%);
+}
+
+@media only screen and (min-width: 992px) {
+  .sidebar {
+    width: 40%;
+    height: calc(100% - 2rem);
+    margin: 1rem;
+    border-radius: 0.5rem;
+
+    > header {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      transform: translate(-60%, -50%) rotate(270deg);
+    }
+
+    > main {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+  }
+
+  .disabled {
+    transform: translateX(calc(100% + 3rem));
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .sidebar {
+    width: 30%;
+  }
+}

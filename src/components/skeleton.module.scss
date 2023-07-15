@@ -1,0 +1,35 @@
+@use '@styles/theme';
+
+@keyframes color-change-dark {
+  0% {
+    background: lighten(theme.$dark-secondary, 5);
+  }
+  100% {
+    background: theme.$dark-secondary;
+  }
+}
+
+@keyframes color-change-light {
+  0% {
+    background: darken(theme.$light-secondary, 5);
+  }
+  100% {
+    background: theme.$light-secondary;
+  }
+}
+
+.skeleton {
+  width: 100%;
+  height: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.dark {
+  @extend .skeleton;
+  animation: color-change-dark 2s infinite alternate ease-in-out;
+}
+
+.light {
+  @extend .skeleton;
+  animation: color-change-light 2s infinite alternate ease-in-out;
+}

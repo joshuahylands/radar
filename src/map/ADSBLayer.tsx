@@ -56,7 +56,7 @@ function AircraftMarker(props: AircraftMarkerProps) {
       <MapTooltip
         updateDependencies={[theme, aircraftTooltipsPermanent]}
         selected={match?.params.icao24 == props.aircraft.hex}
-        permanent={aircraftTooltipsPermanent}
+        permanent={aircraftTooltipsPermanent || match?.params.icao24 == props.aircraft.hex}
         direction="top"
         offset={[ 0, -10 ]}>
         <span>{props.aircraft.flight || props.aircraft.r || props.aircraft.hex}</span>

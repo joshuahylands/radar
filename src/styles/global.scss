@@ -5,7 +5,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -14,7 +14,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: theme.$light-secondary;
-  border-radius: 0.5rem;
 }
 
 /*
