@@ -8,6 +8,7 @@ export default defineConfig({
     alias: [
       { find: '@components', replacement: '/src/components' },
       { find: '@context', replacement: '/src/context' },
+      { find: '@hooks', replacement: '/src/hooks' },
       { find: '@map', replacement: '/src/map' },
       { find: '@model', replacement: '/src/model' },
       { find: '@nav', replacement: '/src/nav' },
