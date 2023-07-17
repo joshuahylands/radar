@@ -19,15 +19,15 @@ function AirportSidebar() {
       <section>
         <div>
           <label>Latitude</label>
-          <span><Skeleton dependencies={[airport]}>{ `${airport?.lat?.toFixed(4)}\xB0` || 'N/A' }</Skeleton></span>
+          <span><Skeleton dependencies={[airport]}>{ airport?.lat?.toFixed(4) || 'N/A' }</Skeleton></span>
         </div>
         <div>
           <label>Longitude</label>
-          <span><Skeleton dependencies={[airport]}>{ `${airport?.lon?.toFixed(4)}\xB0` || 'N/A' }</Skeleton></span>
+          <span><Skeleton dependencies={[airport]}>{ airport?.lon?.toFixed(4) || 'N/A' }</Skeleton></span>
         </div>
         <div>
           <label>Elevation</label>
-          <span><Skeleton dependencies={[airport]}>{ `${airport?.elevation}ft` || 'N/A' }</Skeleton></span>
+          <span><Skeleton dependencies={[airport]}>{ airport?.elevation || 'N/A' }</Skeleton></span>
         </div>
       </section>
       <section>

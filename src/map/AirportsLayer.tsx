@@ -1,5 +1,6 @@
-import { useMarkerColor, useTheme } from '@hooks/settings';
+import { useTheme } from '@context/SettingsContext';
 import { useJetAPIAirports } from '@services/JetAPIService';
+import { THEME_DARK_PRIMARY, THEME_LIGHT_PRIMARY } from '@styles/theme';
 import L, { LatLngBounds, Map } from 'leaflet';
 import { useEffect, useState } from 'react';
 import { Marker, useMapEvent } from 'react-leaflet';
@@ -29,7 +30,6 @@ function AirportsLayer() {
   const theme = useTheme();
   const [bounds, setBounds] = useState<LatLngBounds>(new LatLngBounds([0, 0], [0, 0]));
   const map: Map = useMapEvent('moveend', () => setBounds(map.getBounds()));
-  const markerColor = useMarkerColor();
 
   useEffect(() => setBounds(map.getBounds()), [map]);
 
@@ -46,7 +46,7 @@ function AirportsLayer() {
             icon={(
               L.divIcon({
                 className: '',
-                html: createAirportIconSVG(markerColor)
+                html: createAirportIconSVG(theme == 'dark' ? THEME_LIGHT_PRIMARY : THEME_DARK_PRIMARY)
               })
             )}>
             <MapTooltip

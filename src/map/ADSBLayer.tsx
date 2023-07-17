@@ -1,12 +1,12 @@
-import { SettingsContext } from '@context/SettingsContext';
-import { useMarkerColor, useTheme } from '@hooks/settings';
-import Aircraft from '@model/Aircraft';
-import { useADSBServiceByArea } from '@services/ADSBService';
 import L from 'leaflet';
 import { useContext } from 'react';
 import { Marker, useMap } from 'react-leaflet';
 import { useMatch, useNavigate } from 'react-router-dom';
 
+import { SettingsContext, useTheme } from '@context/SettingsContext';
+import Aircraft from '@model/Aircraft';
+import { useADSBServiceByArea } from '@services/ADSBService';
+import { THEME_DARK_PRIMARY, THEME_LIGHT_PRIMARY } from '@styles/theme';
 import MapTooltip from './MapTooltip';
 
 // 'flight' SVG from Material Icons. This function returns an svg according to the parameters specified
@@ -34,7 +34,6 @@ function AircraftMarker(props: AircraftMarkerProps) {
   const navigate = useNavigate();
   const match = useMatch('/aircraft/:icao24');
   const { aircraftTooltipsPermanent } = useContext(SettingsContext);
-  const markerColor = useMarkerColor();
 
   return (
     <Marker
@@ -47,7 +46,7 @@ function AircraftMarker(props: AircraftMarkerProps) {
           className: '',
           html: createPlaneSVG(
             props.aircraft.track || props.aircraft.true_heading || props.aircraft.mag_heading || 0,
-            markerColor
+            theme == 'dark' ? THEME_LIGHT_PRIMARY : THEME_DARK_PRIMARY
           )
         })
       }
