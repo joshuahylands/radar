@@ -1,4 +1,4 @@
-import { useTheme } from '@context/SettingsContext';
+import { useTheme } from '@hooks/settings';
 import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

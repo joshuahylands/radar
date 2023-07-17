@@ -1,4 +1,4 @@
-import { useTheme } from '@context/SettingsContext';
+import { useTheme } from '@hooks/settings';
 import { CSSProperties, PropsWithChildren } from 'react';
 
 import styles from './skeleton.module.scss';

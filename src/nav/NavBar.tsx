@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import MapSettings from './MapSettings';
 import Settings from './Settings';
 
 import styles from './navBar.module.scss';
@@ -29,6 +30,7 @@ function NavBar() {
     <div className={styles.navbar}>
       <nav>
         <span className="material-symbols-outlined" onClick={() => setContent(<Settings/>)}>settings</span>
+        <span className="material-symbols-outlined" onClick={() => setContent(<MapSettings/>)}>map</span>
       </nav>
       <main style={{ maxHeight: enabled ? '1000px' : '' }}>
         <header>

@@ -5,7 +5,7 @@
   - The second is the selected prop which sets the color of the tooltip if selected and trigger a re-render of color when it is deselected
 */
 
-import { useTheme } from '@context/SettingsContext';
+import { useTheme } from '@hooks/settings';
 import { useEffect, useState } from 'react';
 import { Tooltip, TooltipProps } from 'react-leaflet';
 

@@ -1,5 +1,5 @@
 import Skeleton from '@components/Skeleton';
-import { useTheme } from '@context/SettingsContext';
+import { useTheme } from '@hooks/settings';
 import { useADSBServiceByIcao24 } from '@services/ADSBService';
 import { useJetAPIAircraft, useJetAPIAirport } from '@services/JetAPIService';
 import { useAircraftImage, useCallsignRoute } from '@services/HexDBService';
