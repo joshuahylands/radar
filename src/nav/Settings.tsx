@@ -1,3 +1,4 @@
+import Toggle from '@components/Toggle';
 import { SettingsContext } from '@context/SettingsContext';
 import { useContext } from 'react';
 
@@ -106,11 +107,7 @@ function SettingsAicraftTooltips() {
   return (
     <div className={styles.aircraftTooltips}>
       <span>Aircraft Labels</span>
-      <div
-        className={aircraftTooltipsPermanent ? styles.toggleEnabled : styles.toggle}
-        onClick={() => setAircraftTooltipsPermanent(!aircraftTooltipsPermanent)}>
-        <div/>
-      </div>
+      <Toggle enabled={aircraftTooltipsPermanent} onChange={value => setAircraftTooltipsPermanent(value)}/>
     </div>
   );
 }

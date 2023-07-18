@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import FilterSettings from './FilterSettings';
 import MapSettings from './MapSettings';
 import Settings from './Settings';
 
@@ -31,6 +32,7 @@ function NavBar() {
       <nav>
         <span className="material-symbols-outlined" onClick={() => setContent(<Settings/>)}>settings</span>
         <span className="material-symbols-outlined" onClick={() => setContent(<MapSettings/>)}>map</span>
+        <span className="material-symbols-outlined" onClick={() => setContent(<FilterSettings/>)}>filter_alt</span>
       </nav>
       <main style={{ maxHeight: enabled ? '1000px' : '' }}>
         <header>

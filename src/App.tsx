@@ -1,3 +1,4 @@
+import { FilterContextProvider } from '@context/FilterContext';
 import { SettingsContextProvider } from '@context/SettingsContext';
 import Map from '@map/Map';
 import NavBar from '@nav/NavBar';
@@ -17,11 +18,13 @@ function App() {
 
   return (
     <SettingsContextProvider>
-      <ADSBServiceProvider>
-        <Map/>
-        <Sidebar>{element}</Sidebar>
-      </ADSBServiceProvider>
-      <NavBar/>
+      <FilterContextProvider>
+        <ADSBServiceProvider>
+          <Map/>
+          <Sidebar>{element}</Sidebar>
+        </ADSBServiceProvider>
+        <NavBar/>
+      </FilterContextProvider>
     </SettingsContextProvider>
   );
 }

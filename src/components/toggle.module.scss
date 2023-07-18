@@ -1,0 +1,30 @@
+@use '@styles/theme';
+
+.toggle {
+  position: relative;
+  width: 3rem;
+  height: 1.5rem;
+  background: lightgrey;
+  border-radius: 1rem;
+  margin-inline: 0.5rem;
+  cursor: pointer;
+
+  > div {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background: theme.$light-primary;
+    transition: 0.3s linear background;
+    transition: 0.3s linear transform;
+  }
+}
+
+.toggleEnabled {
+  @extend .toggle;
+
+  > div {
+    transform: translateX(100%);
+    background: theme.$dark-secondary;
+  }
+}

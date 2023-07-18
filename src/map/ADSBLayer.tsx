@@ -1,4 +1,5 @@
 import { SettingsContext } from '@context/SettingsContext';
+import { useFilter } from '@hooks/filter';
 import { useMarkerColor, useTheme } from '@hooks/settings';
 import Aircraft from '@model/Aircraft';
 import { useADSBServiceByArea } from '@services/ADSBService';
@@ -85,10 +86,12 @@ function ADSBLayer() {
     };
   });
 
+  const filteredAircraft = useFilter(aircraft);
+
   return (
     <>
       {
-        aircraft.map(a => <AircraftMarker key={`adsb-layer-marker-${a.hex || a.flight?.trimEnd() || a.r}`} aircraft={a}/>)
+        filteredAircraft.map(a => <AircraftMarker key={`adsb-layer-marker-${a.hex || a.flight?.trimEnd() || a.r}`} aircraft={a}/>)
       }
     </>
   );
