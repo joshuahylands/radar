@@ -12,6 +12,7 @@ import '@styles/global.scss';
 
 function App() {
   const element = useRoutes([
+    { path: '/', element: null },
     { path: '/aircraft/:icao24', element: <AircraftSidebar/> },
     { path: '/airport/:icao', element: <AirportSidebar/> },
   ]);

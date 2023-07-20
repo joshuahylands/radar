@@ -1,7 +1,7 @@
 import Skeleton from '@components/Skeleton';
 import { useTheme } from '@hooks/settings';
 import { useADSBServiceByIcao24 } from '@services/ADSBService';
-import { useJetAPIAircraft, useJetAPIAirport } from '@services/JetAPIService';
+import { useJetAPIAircraft, useJetAPIAirline, useJetAPIAirport } from '@services/JetAPIService';
 import { useAircraftImage, useCallsignRoute } from '@services/HexDBService';
 import { useParams } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ function AircraftSidebar() {
 
   const img = useAircraftImage(icao24);
   const adsb = useADSBServiceByIcao24(icao24);
+  const airline = useJetAPIAirline(adsb?.flight && adsb?.flight.trimEnd() != adsb?.r?.replace('-', '') && adsb?.flight?.length > 3 ? adsb?.flight?.slice(0, 3) : undefined);
   const [departureICAO, arrivalICAO] = useCallsignRoute(adsb?.flight?.trimEnd());
   const departure = useJetAPIAirport(departureICAO);
   const arrival = useJetAPIAirport(arrivalICAO);
@@ -26,7 +27,10 @@ function AircraftSidebar() {
     <div className={styles[theme]}>
       <Skeleton style={{ width: '100%', height: 250, borderRadius: 0 }} dependencies={[adsb]}><img src={img || ''}/></Skeleton>
       <header>
-        <Skeleton dependencies={[adsb]}>{ adsb?.flight || adsb?.r || adsb?.hex || adsb?.t || 'N/A' }{ aircraft && aircraft.owners && ` - ${aircraft.owners}`}</Skeleton>
+        <Skeleton dependencies={[adsb]}>
+          { adsb?.flight || adsb?.r || adsb?.hex || adsb?.t || 'N/A' }
+          { (airline && ` - ${airline.name}`) || (aircraft && aircraft.owners && ` - ${aircraft.owners}`) }
+        </Skeleton>
       </header>
       <section>
         <div>

@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from './sidebar.module.scss';
 
-function Sidebar(props: PropsWithChildren) {
+// We take in a child that must have a child so we can test whether that child is null to hide the sidebar
+type SidebarProps<P> = {
+  children: React.ReactElement<PropsWithChildren<P>> | null;
+};
+
+function Sidebar<P>(props: SidebarProps<P>) {
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -13,7 +18,7 @@ function Sidebar(props: PropsWithChildren) {
 
   // This keeps the content within the sidebar for 1 second while the sidebar animates off the screen
   useEffect(() => {
-    if (props.children == null) {
+    if (props.children && props.children.props.children == null) {
       setEnabled(false);
       setTimeout(() => setContent(null), 1000);
     } else {

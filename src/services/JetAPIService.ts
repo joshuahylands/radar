@@ -19,6 +19,16 @@ type JetAPIAircraft = {
   owners?: string;
 };
 
+type JetAPIAirline = {
+  name: string;
+  alias: string;
+  iata: string;
+  icao: string;
+  callsign: string;
+  country: string;
+  active: string;
+};
+
 type JetAPIAirport = {
   icao?: string;
   type?: string;
@@ -62,6 +72,31 @@ export function useJetAPIAircraft(icao24?: string): JetAPIAircraft | null {
   }, [icao24]);
 
   return aircraft;
+}
+
+export function useJetAPIAirline(icao?: string): JetAPIAirline | null {
+  const [airline, setAirline] = useState<JetAPIAirline | null>(null);
+
+  useEffect(() => {
+    if (icao == undefined) {
+      return;
+    }
+
+    const url = new URL('/api/v1/airline', JET_API_URL);
+    url.searchParams.set('icao', icao);
+
+    fetch(url)
+      .then(res => res.json())
+      .then((json: JetAPIResponse<JetAPIAirline>) => {
+        if (json.success) {
+          setAirline(json.data);
+        }
+      });
+
+    return () => setAirline(null);
+  }, [icao]);
+
+  return airline;
 }
 
 export function useJetAPIAirports(bounds: LatLngBounds): JetAPIAirport[] {
