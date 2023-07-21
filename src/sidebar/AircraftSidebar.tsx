@@ -3,7 +3,7 @@ import { useTheme } from '@hooks/settings';
 import { useADSBServiceByIcao24 } from '@services/ADSBService';
 import { useJetAPIAircraft, useJetAPIAirline, useJetAPIAirport } from '@services/JetAPIService';
 import { useAircraftImage, useCallsignRoute } from '@services/HexDBService';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from './aircraftSidebar.module.scss';
 
@@ -12,6 +12,7 @@ function uppercaseToPascalCase(value: string): string {
 }
 
 function AircraftSidebar() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const { icao24 } = useParams();
 
@@ -34,12 +35,20 @@ function AircraftSidebar() {
       </header>
       <section>
         <div>
-          <h3><Skeleton dependencies={[adsb]}>{ departureICAO || 'N/A' }</Skeleton></h3>
+          <h3
+            className={departureICAO ? styles.airportLink : ''}
+            onClick={() => departureICAO && navigate(`/airport/${departureICAO}`)}>
+            <Skeleton dependencies={[adsb]}>{ departureICAO || 'N/A' }</Skeleton>
+          </h3>
           <span><Skeleton dependencies={[adsb]}>{ departure?.iata_code || 'N/A' }</Skeleton></span>
           <div><Skeleton dependencies={[adsb]}>{ departure?.name || 'N/A' }</Skeleton></div>
         </div>
         <div>
-          <h3><Skeleton dependencies={[adsb]}>{ arrivalICAO || 'N/A' }</Skeleton></h3>
+          <h3
+            className={arrivalICAO ? styles.airportLink : ''}
+            onClick={() => arrivalICAO && navigate(`/airport/${arrivalICAO}`)}>
+            <Skeleton dependencies={[adsb]}>{ arrivalICAO || 'N/A' }</Skeleton>
+          </h3>
           <span><Skeleton dependencies={[adsb]}>{ arrival?.iata_code || 'N/A' }</Skeleton></span>
           <div><Skeleton dependencies={[adsb]}>{ arrival?.name || 'N/A' }</Skeleton></div>
         </div>

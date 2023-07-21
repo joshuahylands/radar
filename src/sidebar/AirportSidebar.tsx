@@ -1,6 +1,7 @@
 import Skeleton from '@components/Skeleton';
 import { useTheme } from '@hooks/settings';
 import { useJetAPIAirport } from '@services/JetAPIService';
+import { useMETAR } from '@services/WeatherService';
 import { useParams } from 'react-router-dom';
 
 import styles from './airportSidebar.module.scss';
@@ -9,6 +10,7 @@ function AirportSidebar() {
   const theme = useTheme();
   const { icao } = useParams();
   const airport = useJetAPIAirport(icao);
+  const METAR = useMETAR(icao);
 
   return (
     <div className={styles[theme]}>
@@ -40,6 +42,10 @@ function AirportSidebar() {
           <span><Skeleton dependencies={[airport]}>{ airport?.continent || 'N/A' }</Skeleton></span>
         </div>
       </section>
+      <div>
+        <label>METAR</label>
+        <pre><Skeleton dependencies={[METAR]}>{ METAR }</Skeleton></pre>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,12 @@
 @use '@styles/theme';
 
 .airportSidebar {
+  label {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
   > header {
     padding: 1rem;
     text-align: center;
@@ -18,15 +24,19 @@
       flex-direction: column;
       text-align: center;
 
-      > label {
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        font-weight: bold;
-      }
-
       > span {
         padding-top: 0.5rem;
       }
+    }
+  }
+
+  > div {
+    padding: 1rem;
+    
+    > pre {
+      padding: 1rem;
+      border-radius: 0.5rem;
+      white-space: normal;
     }
   }
 }
@@ -37,6 +47,11 @@
   > header {
     background: theme.$dark-secondary;
   }
+
+  > div > pre {
+    background: theme.$dark-secondary;
+    border: 1px solid lighten(theme.$dark-secondary, 10);
+  }
 }
 
 .light {
@@ -44,6 +59,11 @@
   
   > header {
     background: theme.$light-secondary;
+  }
+
+  > div > pre {
+    background: theme.$light-secondary;
+    border: 1px solid darken(theme.$light-secondary, 5);
   }
 }
 
