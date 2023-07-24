@@ -8,14 +8,18 @@ type JetAPIResponse<T> = {
   data: T
 };
 
+type JetAPIAircraftType = {
+  icao: string;
+  manufacturer: string;
+  name: string;
+}
+
 type JetAPIAircraft = {
   icao24?: string;
   country?: string;
   country_code?: string;
   registration?: string;
-  manufaturer?: string;
-  type_code?: string;
-  type?: string;
+  type?: JetAPIAircraftType;
   owners?: string;
 };
 
@@ -49,7 +53,25 @@ type JetAPIAirport = {
   keywords?: string;
 };
 
-export function useJetAPIAircraft(icao24?: string): JetAPIAircraft | null {
+async function getJetAPIAircraftType(type_icao: string): Promise<JetAPIAircraftType | undefined> {
+  const url = new URL('/api/v1/type', JET_API_URL);
+  url.searchParams.set('icao', type_icao);
+
+  try {
+    const res = await fetch(url);
+    const json: JetAPIResponse<JetAPIAircraftType> = await res.json();
+    
+    if (json.success) {
+      return json.data;
+    } else {
+      return undefined;
+    }
+  } catch (e) {
+    return undefined;
+  }
+}
+
+export function useJetAPIAircraft(icao24?: string, type_icao?: string): JetAPIAircraft | null {
   const [aircraft, setAircraft] = useState<JetAPIAircraft | null>(null);
 
   useEffect(() => {
@@ -64,12 +86,30 @@ export function useJetAPIAircraft(icao24?: string): JetAPIAircraft | null {
       .then(res => res.json())
       .then((json: JetAPIResponse<JetAPIAircraft>) => {
         if (json.success) {
-          setAircraft(json.data);
+          if (type_icao && typeof json.data.type == 'string') {
+            getJetAPIAircraftType(type_icao).then(type => {
+              setAircraft({
+                ...json.data,
+                type
+              });
+            });
+          } else {
+            setAircraft(json.data);
+          }
+        }
+      })
+      .catch(() => {
+        if (type_icao) {
+          getJetAPIAircraftType(type_icao).then(type => {
+            setAircraft({
+              type
+            });
+          });
         }
       });
 
     return () => setAircraft(null);
-  }, [icao24]);
+  }, [icao24, type_icao]);
 
   return aircraft;
 }

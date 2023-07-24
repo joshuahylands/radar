@@ -7,10 +7,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import styles from './aircraftSidebar.module.scss';
 
-function uppercaseToPascalCase(value: string): string {
-  return value[0] + value.slice(1).toLowerCase();
-}
-
 function AircraftSidebar() {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -22,7 +18,7 @@ function AircraftSidebar() {
   const [departureICAO, arrivalICAO] = useCallsignRoute(adsb?.flight?.trimEnd());
   const departure = useJetAPIAirport(departureICAO);
   const arrival = useJetAPIAirport(arrivalICAO);
-  const aircraft = useJetAPIAircraft(icao24);
+  const aircraft = useJetAPIAircraft(icao24, adsb?.t);
 
   return (
     <div className={styles[theme]}>
@@ -62,9 +58,8 @@ function AircraftSidebar() {
                 {
                   (
                     aircraft &&
-                    aircraft.manufaturer &&
                     aircraft.type
-                  ) ? `${uppercaseToPascalCase(aircraft.manufaturer)} ${aircraft.type?.split('/')[0]} (${adsb?.t})` : adsb?.t
+                  ) ? `${aircraft.type.manufacturer} ${aircraft.type.name} (${aircraft.type.icao})` : adsb?.t
                 }
               </Skeleton>
             </span>
